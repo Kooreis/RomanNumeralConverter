@@ -1,18 +1,12 @@
-def int_to_roman(input):
-    if isinstance(input, type(1)):
-        num = [1, 4, 5, 9, 10, 40, 50, 90, 
-               100, 400, 500, 900, 1000]
-        sym = ["I", "IV", "V", "IX", "X", "XL", 
-               "L", "XC", "C", "CD", "D", "CM", "M"]
-        roman_num = ''
-        i = 12
-        while  input:
-            div = input // num[i]
-            input %= num[i]
-            while div:
-                roman_num += sym[i]
-                div -= 1
-            i -= 1
-        return roman_num
+def roman_to_int(input):
+    if isinstance(input, type("I")):
+        rom_val = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        int_val = 0
+        for i in range(len(input)):
+            if i > 0 and rom_val[input[i]] > rom_val[input[i - 1]]:
+                int_val += rom_val[input[i]] - 2 * rom_val[input[i - 1]]
+            else:
+                int_val += rom_val[input[i]]
+        return int_val
     else:
         return "Invalid input"
